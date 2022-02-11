@@ -2,8 +2,7 @@
   <q-item
     clickable
     tag="a"
-    target="_blank"
-    :href="link"
+    :to="route"
   >
     <q-item-section
       v-if="icon"
@@ -23,25 +22,30 @@
 
 <script>
 export default {
-  name: 'EssentialLink',
+  name: 'EssentialRoute',
+
   props: {
     title: {
       type: String,
       required: true,
+      default: '',
     },
 
     caption: {
       type: String,
+      required: false,
       default: '',
     },
 
-    link: {
+    route: {
       type: String,
+      required: false,
       default: '#',
     },
 
     icon: {
       type: String,
+      required: false,
       default: '',
     },
   },

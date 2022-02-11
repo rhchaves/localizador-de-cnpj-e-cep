@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Buscador
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Buscador ??? v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -24,6 +24,13 @@
       show-if-above
       bordered
       content-class="bg-grey-1"
+
+      :mini="miniState"
+      @mouseover="miniState = false"
+      @mouseout="miniState = true"
+
+      :width="250"
+      :breakpoint="500"
     >
       <q-list>
         <q-item-label
@@ -32,10 +39,11 @@
         >
           Essential Links
         </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
+
+        <EssentialRoute
+          v-for="route in essentialRoutes"
+          :key="route.title"
+          v-bind="route"
         />
       </q-list>
     </q-drawer>
@@ -47,60 +55,49 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue';
+import EssentialRoute from 'components/EssentialRoute.vue';
 
-const linksData = [
+const routesList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
+    title: 'Home',
+    caption: 'Página principal',
+    icon: 'home',
+    route: '/',
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
+    title: 'CNPJ',
+    caption: 'Localizador de CNPJ',
+    icon: 'search',
+    route: '/buscadorCnpj',
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
+    title: 'CEP',
+    caption: 'Localizador de CEP',
+    icon: 'search',
+    route: '/buscadorCep',
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
+    title: 'Ajuda',
+    caption: '',
+    icon: 'help',
+    route: '/',
   },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
-  },
+
 ];
 
 export default {
   name: 'MainLayout',
-  components: { EssentialLink },
+
+  components: {
+    EssentialRoute,
+  },
+
   data() {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData,
+      essentialRoutes: routesList,
+      miniState: true,
+      drawer: false,
     };
   },
 };
