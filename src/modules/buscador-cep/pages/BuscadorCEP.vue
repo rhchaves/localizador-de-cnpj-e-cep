@@ -2,22 +2,23 @@
   <q-page class="flex flex-center">
     <h3>Buscador de CEP</h3>
 
-    <q-form
-      @submit="onSubmit"
-      class="q-gutter-md"
-    >
-      <q-input
-        filled
-        v-model="search"
-        label="Digite o cep"
-        mask="#####-###"
-        unmasked-value
+    <div class="q-pa-md">
+      <q-form
+        @submit="onSubmit"
+        class="q-gutter-md"
       >
-      </q-input>
-      {{ search }}
-      <q-btn push color="primary" label="Push" type="submit"/>
-    </q-form>
-
+        <q-input
+          outlined
+          v-model="search"
+          label="Digite o cep"
+          mask="#####-###"
+          unmasked-value
+        >
+        </q-input>
+        {{ search }}
+        <q-btn push color="primary" label="Buscar" type="submit"/>
+      </q-form>
+    </div>
   </q-page>
 </template>
 
