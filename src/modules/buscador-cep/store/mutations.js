@@ -3,7 +3,7 @@ const SEARCHING = (state, payload) => {
 };
 
 const LIST_CEP = (state, payload) => {
-  state.cep = payload;
+  state.cep.push(payload);
 };
 
 export {
