@@ -15,18 +15,31 @@
           unmasked-value
         >
         </q-input>
-        {{ search }}
         <q-btn push color="primary" label="Buscar" type="submit"/>
       </q-form>
     </div>
+
+    <BuscadorTable
+      v-if="getListCep.length"
+      title="Tabela de Endereço por CEP"
+      :columns="columns"
+      :data="getListCep"
+      selection="multiple"
+    />
+
   </q-page>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import BuscadorTable from 'components/BuscadorTable.vue';
 
 export default {
   name: 'BuscadorCEP',
+
+  components: {
+    BuscadorTable,
+  },
 
   data() {
     return {
@@ -37,6 +50,35 @@ export default {
 
   computed: {
     ...mapGetters('buscadorCep', ['getListCep']),
+
+    columns() {
+      return [
+        {
+          label: 'CEP',
+          field: 'cep',
+        },
+        {
+          label: 'Rua',
+          field: 'logradouro',
+        },
+        {
+          label: 'Bairro',
+          field: 'bairro',
+        },
+        {
+          label: 'Cidade',
+          field: 'localidade',
+        },
+        {
+          label: 'UF',
+          field: 'uf',
+        },
+        {
+          label: 'DDD',
+          field: 'ddd',
+        },
+      ];
+    },
 
   },
 
