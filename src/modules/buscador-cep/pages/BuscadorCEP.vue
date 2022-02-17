@@ -9,7 +9,7 @@
       >
         <q-input
           outlined
-          v-model="search"
+          v-model="searchCep"
           label="Digite o cep"
           mask="#####-###"
           unmasked-value
@@ -43,7 +43,7 @@ export default {
 
   data() {
     return {
-      search: '',
+      searchCep: '',
       listCeps: [],
     };
   },
