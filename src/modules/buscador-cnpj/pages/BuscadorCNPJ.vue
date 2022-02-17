@@ -15,6 +15,7 @@
           unmasked-value
         >
         </q-input>
+        23 065 011 0001 55
         <q-btn push color="primary" label="Buscar" type="submit"/>
       </q-form>
     </div>
@@ -26,18 +27,22 @@
       selection="multiple"
     />
 
+    <BuscadorLoading v-if="loadingCnpj"/>
+
   </q-page>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import BuscadorTable from 'components/BuscadorTable.vue';
+import BuscadorLoading from 'components/BuscadorLoading.vue';
 
 export default {
   name: 'BuscadorCNPJ',
 
   components: {
     BuscadorTable,
+    BuscadorLoading,
   },
 
   data() {
@@ -47,14 +52,14 @@ export default {
   },
 
   computed: {
-    ...mapGetters('buscadorCnpj', ['getListCnpj']),
+    ...mapGetters('buscadorCnpj', ['getListCnpj', 'loadingCnpj']),
 
     columns() {
       return [
-        {
-          label: 'CNPJ',
-          field: 'cnpj',
-        },
+        { label: 'CNPJ', field: 'cnpj' },
+        { label: 'Nome', field: 'name' },
+        { label: 'Cidade', field: 'city' },
+        { label: 'Estado', field: 'state' },
       ];
     },
   },
