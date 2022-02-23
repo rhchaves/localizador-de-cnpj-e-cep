@@ -9,18 +9,19 @@
       >
         <q-input
           outlined
-          v-model="search"
+          v-model="searchCep"
           label="Digite o cep"
           mask="#####-###"
           unmasked-value
         >
         </q-input>
-        {{ search }}
         <q-btn push color="primary" label="Buscar" type="submit"/>
       </q-form>
     </div>
+
     <BuscadorTable
-      title="Tabela de Endereços por Cep"
+      v-if="getListCep.length"
+      title="Tabela de Endereço por CEP"
       :columns="columns"
       :data="getListCep"
       selection="multiple"
@@ -41,7 +42,7 @@ export default {
 
   data() {
     return {
-      search: '',
+      searchCep: '',
       listCeps: [],
     };
   },
@@ -52,27 +53,32 @@ export default {
     columns() {
       return [
         {
+          label: 'CEP',
           field: 'cep',
-          label: 'Cep',
         },
         {
-          field: 'logradouro',
           label: 'Rua',
+          field: 'logradouro',
         },
         {
-          field: 'bairro',
           label: 'Bairro',
+          field: 'bairro',
         },
         {
-          field: 'localidade',
           label: 'Cidade',
+          field: 'localidade',
         },
         {
-          field: 'uf',
           label: 'UF',
+          field: 'uf',
+        },
+        {
+          label: 'DDD',
+          field: 'ddd',
         },
       ];
     },
+
   },
 
   methods: {
